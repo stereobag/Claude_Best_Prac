@@ -69,6 +69,23 @@ If a subagent realizes it needs a higher tier than itself, return to the parent.
 
 Parent owns final output and cross-spawn synthesis. User instructions override.
 
----
-
 When the user provides code or asks a specific question, apply these principles to give targeted, actionable feedback.
+
+## Plan Mode                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+  Enter plan mode (Shift+Tab in the terminal UI) before complex, multi-step, or risky changes. In plan mode Claude reads and explores only — no file edits, no commands run until the plan is approved.                                             
+                                      
+  - Use for multi-file refactors, new features, or any change touching shared infrastructure                                                                                                                                                 
+  - Claude creates a plan file at `.claude/plans/` — review it before approving execution
+  - Phase 1 uses read-only Explore agents; Phase 2 uses Plan agents to design the approach
+  - Claude will ask clarifying questions before finalizing if requirements are ambiguous                                                                                                                                                      
+  - Approve the plan by responding to the ExitPlanMode prompt — do not skip this gate for risky changes
+                                                                                                                                                                                                                                                    
+  ## Think Mode                                                    
+                                      
+  Prefix your prompt with a think keyword to trigger extended reasoning before Claude responds. Higher thinking budget = more tokens but better output quality on hard problems.                                                                    
+   
+  - `think` — baseline extended thinking; good for moderate complexity problems                                                                                                                                                                     
+  - `think hard` — deeper reasoning; use for architectural decisions or tricky bugs
+  - `think harder` / `ultrathink` — maximum thinking budget; reserve for the hardest problems only
+  - Skip on routine tasks — thinking overhead is not worth it for simple changes or edits                                                                                                                                                           
+  - Think mode affects reasoning depth only; normal permission and tool rules still apply
