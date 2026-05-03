@@ -89,3 +89,17 @@ When the user provides code or asks a specific question, apply these principles 
   - `think harder` / `ultrathink` — maximum thinking budget; reserve for the hardest problems only
   - Skip on routine tasks — thinking overhead is not worth it for simple changes or edits                                                                                                                                                           
   - Think mode affects reasoning depth only; normal permission and tool rules still apply
+
+
+## Custom Commands                                               
+                                                                                                                                                                                                                                                    
+  Create reusable slash commands by placing Markdown files in `.claude/commands/` (project-scoped) or `~/.claude/commands/` (personal, all projects). The filename becomes the command name — `refactor.md` → `/refactor`.                          
+                                      
+  - Project commands live in `.claude/commands/` and are version-controlled — share them with your team via the repo                                                                                                                                
+  - Personal commands live in `~/.claude/commands/` — available across all projects, not committed
+  - Use `$ARGUMENTS` as a placeholder to pass dynamic input: `/deploy staging` replaces `$ARGUMENTS` with `staging`                                                                                                                                 
+  - Add YAML frontmatter to restrict tools (`allowed-tools: Read, Grep`) or set a description and model                                                                                                                                             
+  - Prefix a line with `!` to run a bash command and inject its output: `` !`git diff HEAD` ``                                                                                                                                                      
+  - Reference file contents inline with `@`: `@package.json` injects the file into the prompt                                                                                                                                                       
+  - Organize with subdirectories for namespacing: `commands/backend/migrate.md` → `/migrate`                                                                                                                                                        
+  - The recommended modern format is `.claude/skills/<name>/SKILL.md` — supports both slash invocation and autonomous invocation by Claud
